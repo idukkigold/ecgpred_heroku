@@ -48,7 +48,11 @@ def predict_stuff():
 
         # Since we are only predicting the price of one house, just look at the first prediction returned
         predicted_value = predicted_value[0]
-        print(predicted_value)
+
+        if predicted_value==0:
+            predicted_value="Not an Anomaly"
+        else:predicted_value="It's an anomaly"
+
         return render_template("index.html", pred=predicted_value)
 
 if __name__ == "__main__":
