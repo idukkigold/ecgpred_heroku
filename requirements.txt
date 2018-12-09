@@ -10,4 +10,4 @@ sklearn==0.0
 Werkzeug==0.12.2
 gunicorn==19.7.1
 pyod
-
+nose
