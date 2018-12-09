@@ -8,7 +8,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/get-user-data', methods=['POST'])
+@app.route('/getresult', methods=['POST'])
 def predict_stuff():
     if request.method == 'POST':
         model = joblib.load('trained_anomaly detection.pkl')
@@ -22,31 +22,27 @@ def predict_stuff():
         QT = int(request.form.get('QT'))
         T = int(request.form.get('T'))
         P = request.form.get('P')
+        aQRS = request.form.get('aQRS')
+        aT = request.form.get('aT')
+        aP = request.form.get('aP')
         aQRST = request.form.get('aQRST')
         J = request.form.get('J')
-
         heart_rate = request.form.get('heart_rate')
-
         wQ = request.form.get('wQ')
-
         wR = request.form.get('wR')
-
         wS = request.form.get('wS')
         wR_ = request.form.get('wR_')
+        IntrinsicDeflections = request.form.get('IntrinsicDeflections')
+        QRSA = request.form.get('QRSA')
+        QRSTA = request.form.get('QRSTA')
 
-        webdata = [age,sex,height,weight,QRS_duration,PR,QT,T,P,aQRST,J, heart_rate,wQ,wR, wS ,wR_,1,1,1,1,1,1]
+        webdata = [age,sex,height,weight,QRS_duration,PR,QT,T,P,aQRS, aT, aP,aQRST,J, heart_rate,wQ,wR, wS ,wR_,IntrinsicDeflections,QRSA,QRSTA]
+        webdata = [webdata]
 
 
-        webdata = [
-            webdata
-        ]
 
-        # return render_template("index.html", pred=house_to_value) 
-
-        # Run the model and make a prediction for each house in the homes_to_value array
+        # Run the model and make a prediction
         predicted_value = model.predict(webdata)
-
-        # Since we are only predicting the price of one house, just look at the first prediction returned
         predicted_value = predicted_value[0]
 
         if predicted_value==0:
