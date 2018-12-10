@@ -3,12 +3,12 @@ from sklearn.externals import joblib
 
 app = Flask(__name__)
 
-@app.route("/", methods=['GET'])
+@app.route("/", methods=['GET'])  #landing page
 def index():
     return render_template("index.html")
 
 
-@app.route('/getresult', methods=['POST'])
+@app.route('/getresult', methods=['POST'])  #click getresult button
 def predict_stuff():
     if request.method == 'POST':
         model = joblib.load('trained_anomaly detection.pkl')
@@ -21,20 +21,20 @@ def predict_stuff():
         PR = int(request.form.get('PR'))
         QT = int(request.form.get('QT'))
         T = int(request.form.get('T'))
-        P = request.form.get('P')
-        aQRS = request.form.get('aQRS')
-        aT = request.form.get('aT')
-        aP = request.form.get('aP')
-        aQRST = request.form.get('aQRST')
-        J = request.form.get('J')
-        heart_rate = request.form.get('heart_rate')
-        wQ = request.form.get('wQ')
-        wR = request.form.get('wR')
-        wS = request.form.get('wS')
-        wR_ = request.form.get('wR_')
-        IntrinsicDeflections = request.form.get('IntrinsicDeflections')
-        QRSA = request.form.get('QRSA')
-        QRSTA = request.form.get('QRSTA')
+        P = int(request.form.get('P'))
+        aQRS = int(request.form.get('aQRS'))
+        aT = int(request.form.get('aT'))
+        aP = int(request.form.get('aP'))
+        aQRST = int(request.form.get('aQRST'))
+        J = int(request.form.get('J'))
+        heart_rate = int(request.form.get('heart_rate'))
+        wQ = int(request.form.get('wQ'))
+        wR = int(request.form.get('wR'))
+        wS = int(request.form.get('wS'))
+        wR_ = int(request.form.get('wR_'))
+        IntrinsicDeflections = int(request.form.get('IntrinsicDeflections'))
+        QRSA = float(request.form.get('QRSA'))
+        QRSTA = float(request.form.get('QRSTA'))
 
         webdata = [age,sex,height,weight,QRS_duration,PR,QT,T,P,aQRS, aT, aP,aQRST,J, heart_rate,wQ,wR, wS ,wR_,IntrinsicDeflections,QRSA,QRSTA]
         webdata = [webdata]
@@ -46,8 +46,8 @@ def predict_stuff():
         predicted_value = predicted_value[0]
 
         if predicted_value==0:
-            predicted_value="Not an Anomaly"
-        else:predicted_value="It's an anomaly"
+            predicted_value="It's Normal. Enjoy!"
+        else:predicted_value="It's an anomaly, Sorry !"
 
         return render_template("index.html", pred=predicted_value)
 
