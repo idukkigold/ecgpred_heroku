@@ -1,5 +1,8 @@
 # ecgpred_heroku
-ISE 589-4 Course Project
+ISE 589-4 Course Project :
+A very simple app using python-flask and machine learning to predict if your ECG is an anomaly 
+or not.
+
 https://ecgmlpred.herokuapp.com/
 
 TO host it locally:
