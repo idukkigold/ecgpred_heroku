@@ -1,5 +1,6 @@
 # ecgpred_heroku
 ISE 589-4 Course Project
+https://ecgmlpred.herokuapp.com/
 
 TO host it locally:
 1. Create a virtual env: virtualenv test
